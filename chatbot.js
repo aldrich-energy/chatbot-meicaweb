@@ -62,7 +62,7 @@
     <div class="_cb_header">
       <div class="_cb_avatar">🌍</div>
       <div>
-        <div class="_cb_hname">MEICA EXPO 2026a Assistant</div>
+        <div class="_cb_hname">MEICA EXPO 2026 Assistant</div>
         <div class="_cb_hstatus"><span class="_cb_dot"></span> Online · Always here to help</div>
       </div>
     </div>
@@ -76,10 +76,10 @@
   document.body.appendChild(win);
 
   const FAQ = {
-    about: "MEICA EXPO 2026 (Asset Integrity Management Conference & Summit) is Africa's premier event focused on asset integrity, maintenance, and reliability. It brings together industry leaders, engineers, and decision-makers from across the continent and beyond. 🌍",
-    when: "📅 Date: 15–17 September 2026\n📍 Venue: Cairo International Convention Centre\n📌 New Cairo, Egypt\n\nDoors open at 8:00 AM daily!",
-    register: { text: "Registering is easy! We have Visitor Passes, Delegate Packages, and VIP options available.\n\nClick below to secure your spot:", link: "Register Now →", url: "https://aimcs-africa.framer.website/register" },
-    sponsor: "🤝 Sponsorship Packages:\n\n• Bronze – $2,500\n• Silver – $5,000\n• Gold – $10,000\n• Platinum – $20,000\n\nEach includes exhibition space, branding & delegate passes.\nEmail: sponsor@aimcs-africa.com"
+    about: "MEICA EXPO 2026 (MIDDLE EAST INSTRUMENTATION,CYBERSECURITY & AUTOMATION EXPO) is MEICA EXPO premier event focused on asset integrity, maintenance, and reliability. It brings together industry leaders, engineers, and decision-makers from across the continent and beyond. 🌍",
+    when: "📅 Date: 15–16 September 2026\n📍 Venue: Kuwait City,\n📌 Kuwait, Kuwait\n\nDoors open at 8:00 AM daily!",
+    register: { text: "Registering is easy! We have Visitor Passes, Delegate Packages, and VIP options available.\n\nClick below to secure your spot:", link: "Register Now →", url: "https://meicaexpo.com/" },
+    sponsor: "🤝 Sponsorship Packages:\n\n• Diamond – $75,000\n• Silver – $25,000\n• Gold – $40,000\n• Platinum – $55,000\n\nEach includes exhibition space, branding & delegate passes.\nEmail: register@@meicaexpo.com"
   };
 
   const MAIN_QRS = ["What is MEICA EXPO 2026?", "Event Date & Venue", "How to Register?", "Sponsorship Details"];
@@ -97,7 +97,7 @@
     showTyping();
     setTimeout(() => {
       removeTyping();
-      addBot("👋 Hello! Welcome to MEICA EXPO 2026!\n\nTo get started, please share your email address. We'll keep you updated about our upcoming event in Abudhabi! 📩");
+      addBot("👋 Hello! Welcome to MEICA EXPO 2026!\n\nTo get started, please share your email address. We'll keep you updated about our upcoming event in Kuwait! 📩");
       setTimeout(showEmailCard, 350);
     }, 900);
   }
@@ -148,7 +148,7 @@
     showTyping();
     setTimeout(() => {
       removeTyping();
-      addBot("🎉 Thank you! Your email has been saved.\n\nWe'll keep you updated on AIMCS Africa 2026 in Cairo. How can I help you today?", MAIN_QRS);
+      addBot("🎉 Thank you! Your email has been saved.\n\nWe'll keep you updated on MEICA EXPO 2026 in Kuwait City, Kuwait. How can I help you today?", MAIN_QRS);
     }, 800);
   }
 
@@ -210,7 +210,7 @@
       removeTyping();
       if (t.match(/^(hi|hello|hey)/)) {
         addBot("👋 Hello again! How can I help you today?", MAIN_QRS);
-      } else if (t.includes('what is') || t.includes('about') || t.includes('aimcs')) {
+      } else if (t.includes('what is') || t.includes('about') || t.includes('meica')) {
         addBot(FAQ.about, MAIN_QRS);
       } else if (t.includes('date') || t.includes('when') || t.includes('where') || t.includes('venue') || t.includes('location') || t.includes('event date')) {
         addBot(FAQ.when, MAIN_QRS);
@@ -223,7 +223,7 @@
       } else if (t.includes('bye') || t.includes('goodbye')) {
         addBot("Goodbye! 👋 See you at MEICA EXPO 2026. Come back anytime!", []);
       } else {
-        addBot("I'm here to help with questions about AIMCS Africa. Please choose a topic:", MAIN_QRS);
+        addBot("I'm here to help with questions about MEICA EXPO 2026. Please choose a topic:", MAIN_QRS);
       }
     }, 700);
   }
