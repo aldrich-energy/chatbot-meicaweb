@@ -81,8 +81,8 @@
   const FAQ = {
     about: "MEICA EXPO 2026 (7th Edition) is a premier technical expo focused on Instrumentation, Control, Automation & Industrial Cyber Security. It connects regional and international experts, executives, and engineers to explore the latest innovations and best practices in heavy industries across the GCC. ⚙️",
     when: "📅 Date: 15–16 September 2026\n📍 Location: Kuwait\n🎯 Focus: Instrumentation, Automation & Cyber Security\n\nDoors open at 8:00 AM daily!",
-    register: { text: "Registering is easy! We have Visitor Passes, Delegate Packages, and VIP options available.\n\nClick below to secure your spot:", link: "Register Now →", url: "https://aimcs-africa.framer.website/register" },
-    sponsor: "🤝 Sponsorship Packages:\n\n• Bronze – $2,500\n• Silver – $5,000\n• Gold – $10,000\n• Platinum – $20,000\n\nEach includes exhibition space, branding & delegate passes.\nEmail: sponsor@aimcs-africa.com"
+    register: { text: "Registering is easy! We have Visitor Passes, Delegate Packages, and VIP options available.\n\nClick below to secure your spot:", link: "Register Now →", url: "https://meicaexpo.com/registrations" },
+    sponsor: "🤝 Sponsorship Packages:\n\n• Bronze – $2,500\n• Silver – $5,000\n• Gold – $10,000\n• Platinum – $20,000\n\nEach includes exhibition space, branding & delegate passes.\nEmail: register@meicaexpo.com "
   };
 
   const MAIN_QRS = ["What is MEICA EXPO 2026?", "Event Date & Venue", "How to Register?", "Sponsorship Details"];
@@ -245,7 +245,7 @@
       removeTyping();
       if (t.match(/^(hi|hello|hey)/)) {
         addBot("👋 Hello again! How can I help you today?", MAIN_QRS);
-      } else if (t.includes('what is') || t.includes('about') || t.includes('aimcs')) {
+      } else if (t.includes('what is') || t.includes('about') || t.includes('meica')) {
         addBot(FAQ.about, MAIN_QRS);
       } else if (t.includes('date') || t.includes('when') || t.includes('where') || t.includes('venue') || t.includes('location') || t.includes('event date')) {
         addBot(FAQ.when, MAIN_QRS);
