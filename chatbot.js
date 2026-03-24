@@ -1,5 +1,7 @@
 (function () {
-  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxgOORgPmb3eF_7HJI0-dSVgx-Dx7_4oTc3pufOeAF3inQamNFuS67NM8z2sb6g5JPj/exec";
+  const SHEET_URL = "https://script.google.com/macros/s/AKfycbxVy1qtiyteTOXr7q0vBNLvvbcxoHOnZncouWCD2AhEG6ns4qcElkwokJdNmb0e3ltt8Q/exec";
+  const MAILBITE_KEY = "9OS7K5lAbUO7H5BYrIJuXmlSQOScekK68C91";
+  const WEBSITE_NAME = "MEICA EXPO"; // ← change this per website
 
   const css = `
     #_cb_launcher{position:fixed;bottom:28px;right:28px;width:56px;height:56px;border-radius:50%;background:#0F999E;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:99999;transition:transform .2s;}
@@ -7,45 +9,46 @@
     #_cb_launcher::before{content:'';position:absolute;width:56px;height:56px;border-radius:50%;border:2px solid #0F999E;animation:_cb_pulse 2s ease-out infinite;}
     @keyframes _cb_pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.6);opacity:0}}
     #_cb_badge{position:absolute;top:-3px;right:-3px;width:18px;height:18px;background:#ef4444;border-radius:50%;font-size:10px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff;font-family:sans-serif;}
-    #_cb_window{position:fixed;bottom:96px;right:28px;width:360px;height:560px;background:#fff;border-radius:20px;border:1px solid #e5e5e3;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.13);z-index:99998;transform:scale(0.92) translateY(16px);opacity:0;pointer-events:none;transition:transform .25s cubic-bezier(0.34,1.56,0.64,1),opacity .2s ease;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
+    #_cb_window{position:fixed;bottom:96px;right:28px;width:360px;height:540px;background:#fff;border-radius:20px;border:1px solid #e5e5e3;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.13);z-index:99998;transform:scale(0.92) translateY(16px);opacity:0;pointer-events:none;transition:transform .25s cubic-bezier(0.34,1.56,0.64,1),opacity .2s ease;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;}
     #_cb_window.open{transform:scale(1) translateY(0);opacity:1;pointer-events:all;}
-    ._cb_header{padding:16px 18px;background:#0F999E;display:flex;align-items:center;gap:12px;}
-    ._cb_avatar{width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
+    ._cb_header{padding:16px 18px;background:#111;display:flex;align-items:center;gap:12px;}
+    ._cb_avatar{width:38px;height:38px;border-radius:50%;background:#0F999E;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
     ._cb_hname{font-size:14px;font-weight:600;color:#fff;}
-    ._cb_hstatus{font-size:11px;color:#cce0ff;display:flex;align-items:center;gap:5px;margin-top:2px;}
+    ._cb_hstatus{font-size:11px;color:#aaa;display:flex;align-items:center;gap:5px;margin-top:2px;}
     ._cb_dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;}
     #_cb_msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:9px;scroll-behavior:smooth;}
     #_cb_msgs::-webkit-scrollbar{width:3px;}
     #_cb_msgs::-webkit-scrollbar-thumb{background:#e0e0de;border-radius:4px;}
-    ._cb_msg{max-width:85%;font-size:13.5px;line-height:1.6;padding:10px 13px;border-radius:16px;animation:_cb_up .2s ease;}
+    ._cb_msg{max-width:85%;font-size:13.5px;line-height:1.55;padding:10px 13px;border-radius:16px;animation:_cb_up .2s ease;}
     @keyframes _cb_up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-    ._cb_bot{background:#f0f5ff;color:#111;border-bottom-left-radius:4px;align-self:flex-start;}
-    ._cb_user{background:#0F999E;color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
+    ._cb_bot{background:#f5f5f3;color:#111;border-bottom-left-radius:4px;align-self:flex-start;}
+    ._cb_user{background:#111;color:#fff;border-bottom-right-radius:4px;align-self:flex-end;}
     ._cb_qr{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;animation:_cb_up .25s ease;}
-    ._cb_qrbtn{padding:7px 12px;border-radius:20px;border:1.5px solid #0F999E;background:#fff;font-size:12px;color:#0F999E;cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap;font-weight:500;}
+    ._cb_qrbtn{padding:7px 12px;border-radius:20px;border:1.5px solid #0F999E;background:#fff;font-size:12px;color:#111;cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap;font-weight:500;}
     ._cb_qrbtn:hover{background:#0F999E;color:#fff;}
-    ._cb_typing{display:flex;align-items:center;gap:4px;padding:12px 14px;background:#f0f5ff;border-radius:16px;border-bottom-left-radius:4px;align-self:flex-start;width:fit-content;}
-    ._cb_typing span{width:6px;height:6px;border-radius:50%;background:#0F999E;animation:_cb_bounce 1.2s infinite;display:inline-block;}
+    ._cb_typing{display:flex;align-items:center;gap:4px;padding:12px 14px;background:#f5f5f3;border-radius:16px;border-bottom-left-radius:4px;align-self:flex-start;width:fit-content;}
+    ._cb_typing span{width:6px;height:6px;border-radius:50%;background:#aaa;animation:_cb_bounce 1.2s infinite;display:inline-block;}
     ._cb_typing span:nth-child(2){animation-delay:.2s;}
     ._cb_typing span:nth-child(3){animation-delay:.4s;}
     @keyframes _cb_bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
-    ._cb_emailbox{background:#f0f5ff;border:1.5px solid #0F999E;border-radius:14px;padding:14px;animation:_cb_up .3s ease;align-self:flex-start;width:90%;}
-    ._cb_emailbox p{font-size:13px;color:#444;margin-bottom:10px;line-height:1.5;}
-    ._cb_einput{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:inherit;outline:none;transition:border .15s;background:#fff;box-sizing:border-box;margin-bottom:8px;}
+    ._cb_emailcard{background:#fffbf0;border:1.5px solid #0F999E;border-radius:14px;padding:14px;animation:_cb_up .25s ease;align-self:flex-start;width:88%;}
+    ._cb_emailcard p{font-size:13px;color:#444;margin-bottom:10px;line-height:1.5;}
+    ._cb_emailrow{display:flex;gap:7px;}
+    ._cb_einput{flex:1;padding:10px 11px;border:1px solid #ddd;border-radius:8px;font-size:13px;font-family:inherit;outline:none;transition:border .15s;background:#fff;min-width:0;}
     ._cb_einput:focus{border-color:#0F999E;}
-    ._cb_esubmit{width:100%;padding:10px;background:#0F999E;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:600;transition:background .15s;}
-    ._cb_esubmit:hover{background:#003d7a;}
+    ._cb_esubmit{padding:10px 13px;background:#0F999E;color:#fff;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit;font-weight:600;transition:background .15s;white-space:nowrap;flex-shrink:0;}
+    ._cb_esubmit:hover{background:#b8880f;}
     ._cb_esubmit:disabled{opacity:0.6;cursor:not-allowed;}
+    ._cb_errmsg{font-size:11px;color:#ef4444;margin:6px 0 0;display:none;}
     ._cb_inputarea{padding:11px 13px;border-top:1px solid #f0f0ee;display:flex;gap:8px;align-items:center;background:#fff;}
     #_cb_input{flex:1;padding:9px 13px;border:1px solid #e5e5e3;border-radius:22px;font-size:13px;font-family:inherit;outline:none;color:#111;background:#fafafa;transition:border .15s;}
     #_cb_input:focus{border-color:#0F999E;background:#fff;}
     #_cb_input::placeholder{color:#bbb;}
     #_cb_input:disabled{opacity:0.4;cursor:not-allowed;}
-    #_cb_sendbtn{width:36px;height:36px;border-radius:50%;background:#0F999E;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
-    #_cb_sendbtn:hover{background:#003d7a;}
+    #_cb_sendbtn{width:36px;height:36px;border-radius:50%;background:#111;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;}
+    #_cb_sendbtn:hover{background:#333;}
     ._cb_link{color:#0F999E;text-decoration:underline;font-weight:500;display:inline-block;margin-top:6px;}
     ._cb_powered{text-align:center;font-size:10px;color:#ccc;padding:5px 0 3px;}
-    ._cb_errmsg{font-size:11px;color:#ef4444;margin-top:4px;display:none;}
   `;
   const style = document.createElement('style');
   style.textContent = css;
@@ -60,7 +63,7 @@
   win.id = '_cb_window';
   win.innerHTML = `
     <div class="_cb_header">
-      <div class="_cb_avatar">⚙️</div>
+      <div class="_cb_avatar">🌍</div>
       <div>
         <div class="_cb_hname">MEICA EXPO Assistant</div>
         <div class="_cb_hstatus"><span class="_cb_dot"></span> Online · Always here to help</div>
@@ -68,14 +71,13 @@
     </div>
     <div id="_cb_msgs"></div>
     <div class="_cb_inputarea">
-      <input type="text" id="_cb_input" placeholder="Enter your email to get started..." disabled />
+      <input type="text" id="_cb_input" placeholder="Enter your email above first..." disabled />
       <button id="_cb_sendbtn"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg></button>
     </div>
     <div class="_cb_powered">MEICA EXPO 2026 · Smart Assistant</div>
   `;
   document.body.appendChild(win);
 
-  // ── FAQ DATA ─────────────────────────────────────────────────────────────
   const FAQ = {
     about: "MEICA EXPO 2026 (7th Edition) is a premier technical expo focused on Instrumentation, Control, Automation & Industrial Cyber Security. It connects regional and international experts, executives, and engineers to explore the latest innovations and best practices in heavy industries across the GCC. ⚙️",
     when: "📅 Date: 15–16 September 2026\n📍 Location: Kuwait\n🎯 Focus: Instrumentation, Automation & Cyber Security\n\nDoors open at 8:00 AM daily!",
@@ -86,7 +88,6 @@
     },
     sponsor: "🤝 Sponsorship Packages:\n\n💎 Diamond – USD 75,000\n🥇 Platinum – USD 55,000\n🥈 Gold – USD 40,000\n🥉 Silver – USD 25,000\n\nEach package includes exhibition space, branding & delegate passes.\n📧 Contact: sponsor@meica-expo.com"
   };
-
   const MAIN_QRS = ["What is MEICA EXPO?", "Event Date & Location", "How to Register?", "Sponsorship Packages"];
   let chatOpen = false, greeted = false, emailCollected = false;
 
@@ -105,6 +106,88 @@
       addBot("👋 Hello! Welcome to MEICA EXPO 2026!\n\nWe're glad you're here. Please enter your email below to get started and receive updates about our upcoming expo in Kuwait. 📩");
       setTimeout(() => showEmailCapture(), 300);
     }, 900);
+  }
+
+  function showEmailCard() {
+    const msgs = document.getElementById('_cb_msgs');
+    const card = document.createElement('div');
+    card.className = '_cb_emailcard';
+    card.id = '_cb_emailcard';
+    card.innerHTML = `
+      <p>✉️ Enter your email to continue:</p>
+      <div class="_cb_emailrow">
+        <input type="email" class="_cb_einput" id="_cb_einput" placeholder="your@email.com"/>
+        <button class="_cb_esubmit" id="_cb_esubmit">Submit</button>
+      </div>
+      <p class="_cb_errmsg" id="_cb_errmsg"></p>`;
+    msgs.appendChild(card);
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(() => { const i = document.getElementById('_cb_einput'); if(i) i.focus(); }, 150);
+    document.getElementById('_cb_esubmit').addEventListener('click', submitEmail);
+    document.getElementById('_cb_einput').addEventListener('keydown', e => { if (e.key === 'Enter') submitEmail(); });
+  }
+
+  async function submitEmail() {
+    const inp = document.getElementById('_cb_einput');
+    const btn = document.getElementById('_cb_esubmit');
+    const errEl = document.getElementById('_cb_errmsg');
+    const email = inp ? inp.value.trim() : '';
+
+    // Basic format check
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      if (inp) inp.style.borderColor = '#ef4444';
+      if (errEl) { errEl.textContent = 'Please enter a valid email address.'; errEl.style.display = 'block'; }
+      setTimeout(() => { if(inp) inp.style.borderColor = '#ddd'; }, 1500);
+      return;
+    }
+
+    // Clear previous errors
+    if (errEl) { errEl.style.display = 'none'; errEl.textContent = ''; }
+    if (btn) { btn.disabled = true; btn.textContent = 'Checking...'; }
+
+    try {
+      // Step 1: Mailbite validation
+      const res = await fetch(`https://mailbite.io/api/check?key=${MAILBITE_KEY}&email=${encodeURIComponent(email)}`);
+      const result = await res.json();
+
+      if (result.email_status === 'INVALID' || result.status === 'error') {
+        const msg = result.message || 'Invalid email address. Please enter a valid email.';
+        if (inp) inp.style.borderColor = '#ef4444';
+        if (errEl) { errEl.textContent = msg; errEl.style.display = 'block'; }
+        if (btn) { btn.disabled = false; btn.textContent = 'Submit'; }
+        return;
+      }
+    } catch {
+      // Mailbite unreachable — continue anyway
+    }
+
+    // Step 2: Save to Google Sheet with website name
+    if (btn) btn.textContent = 'Saving...';
+    fetch(SHEET_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        timestamp: new Date().toISOString(),
+        website: WEBSITE_NAME,
+      })
+    }).catch(() => {});
+
+    // Step 3: Continue chat
+    emailCollected = true;
+    const card = document.getElementById('_cb_emailcard');
+    if (card) card.remove();
+    addUser(email);
+
+    const textInput = document.getElementById('_cb_input');
+    if (textInput) { textInput.disabled = false; textInput.placeholder = 'Type a message or pick a topic...'; }
+
+    showTyping();
+    setTimeout(() => {
+      removeTyping();
+      addBot("🎉 Thank you! Your email has been saved.\n\nWe'll keep you updated on MEICA EXPO 2026 in Kuwait. Now, how can I help you today?", MAIN_QRS);
+    }, 800);
   }
 
   function addBot(text, qrs = [], linkObj = null) {
@@ -156,58 +239,6 @@
   }
 
   function removeTyping() { const t = document.getElementById('_cb_typing'); if (t) t.remove(); }
-
-  function showEmailCapture() {
-    const msgs = document.getElementById('_cb_msgs');
-    const box = document.createElement('div');
-    box.className = '_cb_emailbox'; box.id = '_cb_emailbox';
-    box.innerHTML = `
-      <p>✉️ Please enter your email address:</p>
-      <input type="email" class="_cb_einput" id="_cb_einput" placeholder="your@email.com"/>
-      <div class="_cb_errmsg" id="_cb_errmsg">Please enter a valid email address.</div>
-      <button class="_cb_esubmit" id="_cb_esubmit">Submit & Continue →</button>
-    `;
-    msgs.appendChild(box);
-    msgs.scrollTop = msgs.scrollHeight;
-    setTimeout(() => { const i = document.getElementById('_cb_einput'); if(i) i.focus(); }, 150);
-    document.getElementById('_cb_esubmit').addEventListener('click', submitEmail);
-    document.getElementById('_cb_einput').addEventListener('keydown', e => { if (e.key === 'Enter') submitEmail(); });
-  }
-
-  function submitEmail() {
-    const inp = document.getElementById('_cb_einput');
-    const btn = document.getElementById('_cb_esubmit');
-    const err = document.getElementById('_cb_errmsg');
-    const email = inp ? inp.value.trim() : '';
-    if (!email || !email.includes('@') || !email.includes('.')) {
-      if(inp) inp.style.borderColor = '#ef4444';
-      if(err) err.style.display = 'block';
-      setTimeout(() => { if(inp) inp.style.borderColor = '#ddd'; if(err) err.style.display = 'none'; }, 2000);
-      return;
-    }
-    if(btn) { btn.disabled = true; btn.textContent = 'Saving...'; }
-
-    fetch(SHEET_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email })
-    }).catch(() => {});
-
-    emailCollected = true;
-    const box = document.getElementById('_cb_emailbox');
-    if (box) box.remove();
-    addUser(email);
-
-    const textInput = document.getElementById('_cb_input');
-    if (textInput) { textInput.disabled = false; textInput.placeholder = 'Type a message or pick a topic...'; }
-
-    showTyping();
-    setTimeout(() => {
-      removeTyping();
-      addBot("🎉 Thank you! Your email has been saved.\n\nWe'll keep you updated on MEICA EXPO 2026 in Kuwait. Now, how can I help you today?", MAIN_QRS);
-    }, 800);
-  }
 
   function handleInput(text) {
     if (!emailCollected) return;
