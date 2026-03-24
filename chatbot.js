@@ -65,7 +65,7 @@
     <div class="_cb_header">
       <div class="_cb_avatar">🌍</div>
       <div>
-        <div class="_cb_hname">AIMCS Africa Assistant</div>
+        <div class="_cb_hname">MEICA EXPO 2026 Assistant</div>
         <div class="_cb_hstatus"><span class="_cb_dot"></span> Online · Always here to help</div>
       </div>
     </div>
@@ -74,18 +74,18 @@
       <input type="text" id="_cb_input" placeholder="Enter your email above first..." disabled />
       <button id="_cb_sendbtn"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg></button>
     </div>
-    <div class="_cb_powered">AIMCS Africa · Smart Assistant</div>
+    <div class="_cb_powered">MEICA EXPO 2026 · Smart Assistant</div>
   `;
   document.body.appendChild(win);
 
   const FAQ = {
-    about: "AIMCS Africa (Asset Integrity Management Conference & Summit) is Africa's premier event focused on asset integrity, maintenance, and reliability. It brings together industry leaders, engineers, and decision-makers from across the continent and beyond. 🌍",
-    when: "📅 Date: 15–17 September 2026\n📍 Venue: Cairo International Convention Centre\n📌 New Cairo, Egypt\n\nDoors open at 8:00 AM daily!",
+    about: "MEICA EXPO 2026 (Asset Integrity Management Conference & Summit) is Africa's premier event focused on asset integrity, maintenance, and reliability. It brings together industry leaders, engineers, and decision-makers from across the continent and beyond. 🌍",
+    when: "📅 Date: 15–16 September 2026\n📍 Location: Kuwait\n🎯 Focus: Instrumentation, Automation & Cyber Security\n\nDoors open at 8:00 AM daily!",
     register: { text: "Registering is easy! We have Visitor Passes, Delegate Packages, and VIP options available.\n\nClick below to secure your spot:", link: "Register Now →", url: "https://aimcs-africa.framer.website/register" },
     sponsor: "🤝 Sponsorship Packages:\n\n• Bronze – $2,500\n• Silver – $5,000\n• Gold – $10,000\n• Platinum – $20,000\n\nEach includes exhibition space, branding & delegate passes.\nEmail: sponsor@aimcs-africa.com"
   };
 
-  const MAIN_QRS = ["What is AIMCS Africa?", "Event Date & Venue", "How to Register?", "Sponsorship Details"];
+  const MAIN_QRS = ["What is MEICA EXPO 2026?", "Event Date & Venue", "How to Register?", "Sponsorship Details"];
   let chatOpen = false, greeted = false, emailCollected = false;
 
   launcher.addEventListener('click', () => {
@@ -100,7 +100,7 @@
     showTyping();
     setTimeout(() => {
       removeTyping();
-      addBot("👋 Hello! Welcome to AIMCS Africa!\n\nTo get started, please share your email address. We'll keep you updated about our upcoming event in Cairo! 📩");
+      addBot("👋 Hello! Welcome to MEICA EXPO 2026!\n\nTo get started, please share your email address. We'll keep you updated about our upcoming event in Kuwait! 📩");
       setTimeout(showEmailCard, 350);
     }, 900);
   }
@@ -183,7 +183,7 @@
     showTyping();
     setTimeout(() => {
       removeTyping();
-      addBot("🎉 Thank you! Your email has been saved.\n\nWe'll keep you updated on AIMCS Africa 2026 in Cairo. How can I help you today?", MAIN_QRS);
+      addBot("🎉 Thank you! Your email has been saved.\n\nWe'll keep you updated on MEICA EXPO 2026 2026 in Kuwait. How can I help you today?", MAIN_QRS);
     }, 800);
   }
 
@@ -254,11 +254,11 @@
       } else if (t.includes('sponsor') || t.includes('package') || t.includes('partner') || t.includes('exhibit')) {
         addBot(FAQ.sponsor, MAIN_QRS);
       } else if (t.includes('thank')) {
-        addBot("You're welcome! 😊 See you at AIMCS Africa 2026 in Cairo!", MAIN_QRS);
+        addBot("You're welcome! 😊 See you at MEICA EXPO 2026 2026 in Kuwait!", MAIN_QRS);
       } else if (t.includes('bye') || t.includes('goodbye')) {
-        addBot("Goodbye! 👋 See you at AIMCS Africa 2026. Come back anytime!", []);
+        addBot("Goodbye! 👋 See you at MEICA EXPO 2026 2026. Come back anytime!", []);
       } else {
-        addBot("I'm here to help with questions about AIMCS Africa. Please choose a topic:", MAIN_QRS);
+        addBot("I'm here to help with questions about MEICA EXPO 2026. Please choose a topic:", MAIN_QRS);
       }
     }, 700);
   }
