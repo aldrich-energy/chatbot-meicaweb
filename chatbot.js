@@ -1,6 +1,6 @@
 (function () {
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbxVy1qtiyteTOXr7q0vBNLvvbcxoHOnZncouWCD2AhEG6ns4qcElkwokJdNmb0e3ltt8Q/exec";
-  const MAILBITE_KEY = "9OS7K5lAbUO7H5BYrIJuXmlSQOScekK68C91";
+  const MAILBITE_KEY = "L5X3cRWWY49edQQpI7b8YHM7ds1crJKltsOo";
   const WEBSITE_NAME = "MEICA EXPO"; // ← change this per website
 
   const css = `
