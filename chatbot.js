@@ -173,7 +173,7 @@
       })
     }).catch(() => {});
 
-        // Step 2.5: Email Notification
+    // Step 2.5: Email Notification
     fetch(NOTIFICATION_API, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
