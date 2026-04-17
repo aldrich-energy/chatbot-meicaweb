@@ -64,7 +64,9 @@
   win.id = '_cb_window';
   win.innerHTML = `
     <div class="_cb_header">
-      <div class="_cb_avatar">🌍</div>
+      <div class="_cb_avatar">        
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3F2B61" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+      </div>
       <div>
         <div class="_cb_hname">MEICA EXPO 2026 Assistant</div>
         <div class="_cb_hstatus"><span class="_cb_dot"></span> Online · Always here to help</div>
@@ -83,7 +85,11 @@
     about: "MEICA EXPO 2026 (7th Edition) is a premier technical expo focused on Instrumentation, Control, Automation & Industrial Cyber Security. It connects regional and international experts, executives, and engineers to explore the latest innovations and best practices in heavy industries across the GCC. ⚙️",
     when: "📅 Date: 15–16 September 2026\n📍 Location: Kuwait\n🎯 Focus: Instrumentation, Automation & Cyber Security\n\nDoors open at 8:00 AM daily!",
     register: { text: "Registering is easy! We have Visitor Passes, Delegate Packages, and VIP options available.\n\nClick below to secure your spot:", link: "Register Now →", url: "https://meicaexpo.com/registrations" },
-    sponsor: "🤝 Sponsorship Packages:\n\n• Bronze – $2,500\n• Silver – $5,000\n• Gold – $10,000\n• Platinum – $20,000\n\nEach includes exhibition space, branding & delegate passes.\nEmail: register@meicaexpo.com "
+    sponsor: {
+      text: "Sponsorship Opportunities:\n\nFor sponsorship details and packages, please contact our team. We would be happy to provide you with more information on how you can participate.\n\n📧 Contact:",
+      link: "register@meicaexpo.com",
+      url: "mailto:register@meicaexpo.com"
+    }
   };
 
   const MAIN_QRS = ["What is MEICA EXPO 2026?", "Event Date & Venue", "How to Register?", "Sponsorship Details"];
