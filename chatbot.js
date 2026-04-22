@@ -1,6 +1,6 @@
 (function () {
   const SHEET_URL = "https://script.google.com/macros/s/AKfycbwLgLdTakPKptg3vqwIQSii__l7Q31VOwBLWQGUdWVtCVsKrZMSLR8b0tBaKVbVh3uNiQ/exec";
-  const MAILBITE_KEY = "L5X3cRWWY49edQQpI7b8YHM7ds1crJKltsOo";
+  const MAILBITE_KEY = "IeWdPN5hoRR7eoSGHmhJQol0WP18331ZaPsa";
   const NOTIFICATION_API = "https://aldrich-energy-htx9.vercel.app/api/meica-email-notification"; 
   const WEBSITE_NAME = "MEICA EXPO"; // ← change this per website
 
